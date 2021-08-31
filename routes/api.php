@@ -19,4 +19,5 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/todo', [TodoController::class, 'store'])->name('todo.store');
     Route::put('/todo/{id}', [TodoController::class, 'update'])->name('todo.update')->whereNumber('id');
     Route::delete('/todo/{id}', [TodoController::class, 'delete'])->name('todo.delete')->whereNumber('id');
+    Route::get('/todo/page', [TodoController::class, 'page'])->name('todo.page');
 });

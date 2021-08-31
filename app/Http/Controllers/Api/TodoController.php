@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TodoCollectionResource;
 use App\Http\Resources\TodoResource;
 use App\Models\Todo;
 use Illuminate\Http\Request;
@@ -15,12 +16,20 @@ class TodoController extends Controller
 
     public function index()
     {
-        return TodoResource::collection($this->model->get());
+        return new TodoCollectionResource($this->model->get());
+    }
+
+    public function page()
+    {
+        return new TodoCollectionResource($this->model->paginate(3));
     }
 
     public function show($id)
     {
-        return new TodoResource($this->model->find($id));
+        $model = $this->model->find($id);
+        if ($model) {
+            return new TodoResource($model);
+        }
     }
 
     public function store(Request $request)

@@ -11,8 +11,9 @@ class TodoResource extends JsonResource
         return [
             'id' => $this->id,
             'description' => $this->description,
-            'active' => $this->active,
-            'created_at' => $this->created_at
+            'active' => $this->active ? true: false,
+            'created_at' => $this->created_at->format('Y-m-d\TH:i:s.u'),
+            'updated_at' => $this->updated_at->format('Y-m-d\TH:i:s.u'),
         ];
     }
 }
